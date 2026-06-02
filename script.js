@@ -88,6 +88,16 @@ projects.forEach(project => {
     });
 });
 
+// Header scroll effect
+const header = document.querySelector('.brutal-header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
 // --- i18n & THEMES --- //
 
 const translations = {

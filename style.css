@@ -137,6 +137,12 @@ a {
     z-index: 100;
     mix-blend-mode: difference;
     color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+}
+.brutal-header.scrolled {
+    mix-blend-mode: normal;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 nav {
     display: flex;
