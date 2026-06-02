@@ -28,7 +28,7 @@ expertiseBlocks.forEach(block => {
         const hoverId = block.getAttribute('data-hover');
         // Update Grid
         mediaGrid.className = 'media-grid hover-' + hoverId;
-        
+
         // Update floating label
         const labelText = block.querySelector('.expertise-label').innerText;
         cursorLabel.innerText = 'VIEW ' + labelText;
@@ -52,13 +52,13 @@ const parallaxElements = document.querySelectorAll('[data-speed]');
 parallaxElements.forEach(el => {
     // Determine translation amount based on speed attribute
     const speed = parseFloat(el.getAttribute('data-speed'));
-    
+
     // Normal speed is 1. Less than 1 = slower (moves down slightly relative to scroll),
     // Greater than 1 = faster (moves up slightly relative to scroll)
     // To make it look like Blit Studio, we use y offsets
-    const yOffset = (1 - speed) * 300; 
+    const yOffset = (1 - speed) * 300;
 
-    gsap.fromTo(el, 
+    gsap.fromTo(el,
         { y: -yOffset },
         {
             y: yOffset,
@@ -99,8 +99,8 @@ const translations = {
         "hero-title": "DIGITAL<br>CRAFTER",
         "hero-sub1": "Меня зовут Пётр Баркун.",
         "hero-sub2": "Я создаю цифровое будущее.",
-        "about-title": "ИННОВАЦИИ В<br>КАЖДОМ<br>ПИКСЕЛЕ.",
-        "about-desc": "UX/UI дизайнер с 8-летним опытом. Проектирую мобильные и веб-интерфейсы, которые работают и впечатляют. Грамотное юзабилити — мой приоритет.",
+        "about-title": "ИННОВАЦИИ<br>В КАЖДОМ<br>ПИКСЕЛЕ.",
+        "about-desc": "Специалист по компьютерной графике с 8-летним опытом. Проектирую мобильные и веб-интерфейсы, которые работают и впечатляют. Создаю рекламные баннеры, логотипы брендбуки и многое другое.",
         "about-li1": "Возраст: 27 лет",
         "about-li2": "Проживаю: Минск, Беларусь",
         "about-li3": "Figma, Illustrator, HTML5-баннеры",
@@ -130,8 +130,8 @@ const translations = {
         "hero-title": "DIGITAL<br>CRAFTER",
         "hero-sub1": "My name is Peter Barkun.",
         "hero-sub2": "I shape the digital future.",
-        "about-title": "INNOVATION IN<br>EVERY<br>PIXEL.",
-        "about-desc": "UX/UI designer with 8 years of experience. I design mobile and web interfaces that work and impress. Smart usability is my priority.",
+        "about-title": "INNOVATION<br>IN EVERY<br>PIXEL.",
+        "about-desc": "Computer graphics specialist with 8 years of experience. I design mobile and web interfaces that work and impress. I create advertising banners, logos, brandbooks, and much more.",
         "about-li1": "Age: 27",
         "about-li2": "Location: Minsk, Belarus",
         "about-li3": "Figma, Illustrator, HTML5-banners",
@@ -161,8 +161,8 @@ const translations = {
         "hero-title": "DIGITAL<br>CRAFTER",
         "hero-sub1": "Мяне завуць Пётр Баркун.",
         "hero-sub2": "Я ствараю лічбавую будучыню.",
-        "about-title": "ІНАВАЦЫІ Ў<br>КОЖНЫМ<br>ПІКСЕЛІ.",
-        "about-desc": "UX/UI дызайнер з 8-гадовым вопытам. Праектую мабільныя і вэб-інтэрфейсы, якія працуюць і ўражваюць. Пісьменнае юзабіліці — мой прыярытэт.",
+        "about-title": "ІНАВАЦЫІ<br>Ў КОЖНЫМ<br>ПІКСЕЛІ.",
+        "about-desc": "Спецыяліст па камп'ютарнай графіцы з 8-гадовым вопытам. Праектую мабільныя і вэб-інтэрфейсы, якія працуюць і ўражваюць. Ствараю рэкламныя банеры, лагатыпы брэндбукі і многае іншае.",
         "about-li1": "Узрост: 27 гадоў",
         "about-li2": "Месцазнаходжанне: Мінск, Беларусь",
         "about-li3": "Figma, Illustrator, HTML5-банеры",
@@ -198,7 +198,7 @@ function applyLanguage(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
-    
+
     langBtns.forEach(btn => {
         if (btn.getAttribute('data-lang') === lang) {
             btn.classList.add('active');
@@ -206,7 +206,7 @@ function applyLanguage(lang) {
             btn.classList.remove('active');
         }
     });
-    
+
     localStorage.setItem('language', lang);
     setTimeout(() => ScrollTrigger.refresh(), 100);
 }
