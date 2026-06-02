@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пётр Баркун | UX/UI Дизайнер</title>
+    <meta name="description" content="Портфолио Петра Баркуна. UX/UI, веб-разработка, дизайн логотипов и брендбуков.">
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP for Animations & Parallax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="theme-brutal">
+    <div class="cursor"></div>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span data-i18n="marquee">UX/UI ДИЗАЙН ✦ ВЕБ-РАЗРАБОТКА ✦ ЛОГОТИПЫ ✦ ИЛЛЮСТРАЦИИ ✦ ПОЛИГРАФИЯ ✦</span>
+            <span data-i18n="marquee">UX/UI ДИЗАЙН ✦ ВЕБ-РАЗРАБОТКА ✦ ЛОГОТИПЫ ✦ ИЛЛЮСТРАЦИИ ✦ ПОЛИГРАФИЯ ✦</span>
+            <span data-i18n="marquee">UX/UI ДИЗАЙН ✦ ВЕБ-РАЗРАБОТКА ✦ ЛОГОТИПЫ ✦ ИЛЛЮСТРАЦИИ ✦ ПОЛИГРАФИЯ ✦</span>
+        </div>
+    </div>
+
+    <header class="brutal-header">
+        <nav>
+            <div class="logo">PETER BARKUN<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#about" data-i18n="nav-about">Обо мне</a></li>
+                <li><a href="#projects" data-i18n="nav-projects">Работы</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Контакты</a></li>
+            </ul>
+            <div class="ui-controls">
+                <div class="lang-switcher">
+                    <span class="lang-btn active" data-lang="ru">RU</span> /
+                    <span class="lang-btn" data-lang="en">EN</span> /
+                    <span class="lang-btn" data-lang="be">BE</span>
+                </div>
+                <div class="theme-switcher">
+                    <span class="theme-btn" id="themeToggle" data-i18n="theme-toggle">LIGHT</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section">
+                <!-- Placeholder Video Background -->
+                <div class="hero-bg" data-speed="0.5">
+                    <video autoplay loop muted playsinline>
+                        <source src="https://cdn.pixabay.com/video/2022/01/18/104351-665561136_tiny.mp4"
+                            type="video/mp4">
+                    </video>
+                    <div class="overlay"></div>
+                </div>
+
+                <div class="hero-content">
+                    <h1 class="huge-title" data-speed="0.8" data-i18n="hero-title">DIGITAL<br>CRAFTER</h1>
+                    <div class="hero-sub" data-speed="1.2">
+                        <p data-i18n="hero-sub1">Меня зовут Пётр Баркун.</p>
+                        <p data-i18n="hero-sub2">Я создаю цифровое будущее.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Text Section -->
+            <section id="about" class="text-section">
+                <div class="container">
+                    <h2 class="brutal-title" data-speed="0.9" data-i18n="about-title">ИННОВАЦИИ<br>В битом
+                        КАЖДОМ<br>ПИКСЕЛЕ.
+                    </h2>
+                    <div class="about-grid">
+                        <div class="about-text" data-speed="1.1">
+                            <p data-i18n="about-desc">UX/UI дизайнер с 8-летним опытом. Проектирую мобильные и
+                                веб-интерфейсы, которые работают и впечатляют. Грамотное юзабилити — мой приоритет.</p>
+                            <ul class="brutal-list">
+                                <li data-i18n="about-li1">Возраст: 27 лет</li>
+                                <li data-i18n="about-li2">Проживаю: Минск, Беларусь</li>
+                                <li data-i18n="about-li3">Figma, Illustrator, HTML5-баннеры</li>
+                            </ul>
+                        </div>
+                        <div class="about-img" data-speed="0.7">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop"
+                                alt="Abstract 3D Design">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expertise Section (Ref.digital style) -->
+            <section id="expertise" class="expertise-section">
+                <div class="expertise-header">
+                    <h2 class="expertise-title" data-i18n="exp-title">Вместо того чтобы подстраиваться<br>под изменения,
+                        я их создаю.</h2>
+                    <a href="#projects" class="brutal-btn" data-i18n="exp-btn">СМОТРЕТЬ РАБОТЫ</a>
+                </div>
+
+                <div class="expertise-container">
+                    <!-- Corner labels with descriptions -->
+                    <div class="expertise-block top-left" data-hover="1">
+                        <div class="expertise-label" data-i18n="exp-label1">UX/UI Дизайн</div>
+                        <div class="expertise-desc" data-i18n="exp-desc1">ПРОЕКТИРУЮ ИНТЕРФЕЙСЫ,<br>КОТОРЫЕ ВПЕЧАТЛЯЮТ И
+                            РАБОТАЮТ.</div>
+                    </div>
+
+                    <div class="expertise-block top-right" data-hover="2">
+                        <div class="expertise-label" data-i18n="exp-label2">Веб-разработка</div>
+                        <div class="expertise-desc" data-i18n="exp-desc2">СОЗДАЮ БЫСТРЫЕ И НАДЕЖНЫЕ<br>ЦИФРОВЫЕ
+                            ПЛАТФОРМЫ.</div>
+                    </div>
+
+                    <div class="expertise-block bottom-left" data-hover="3">
+                        <div class="expertise-label" data-i18n="exp-label3">Брендинг</div>
+                        <div class="expertise-desc" data-i18n="exp-desc3">ФОРМИРУЮ УЗНАВАЕМЫЙ<br>ВИЗУАЛЬНЫЙ ЯЗЫК
+                            КОМПАНИИ.</div>
+                    </div>
+
+                    <div class="expertise-block bottom-right" data-hover="4">
+                        <div class="expertise-label" data-i18n="exp-label4">Иллюстрация</div>
+                        <div class="expertise-desc" data-i18n="exp-desc4">РИСУЮ УНИКАЛЬНУЮ ГРАФИКУ<br>ДЛЯ ЛЮБЫХ ЗАДАЧ.
+                        </div>
+                    </div>
+
+                    <!-- Center media grid -->
+                    <div class="expertise-media-center">
+                        <div class="media-grid">
+                            <div class="grid-img-wrap"><img
+                                    src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=500&auto=format&fit=crop"
+                                    alt="UX/UI Design"></div>
+                            <div class="grid-img-wrap"><img
+                                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=500&auto=format&fit=crop"
+                                    alt="Web Development"></div>
+                            <div class="grid-img-wrap"><img
+                                    src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=500&auto=format&fit=crop"
+                                    alt="Branding"></div>
+                            <div class="grid-img-wrap"><img
+                                    src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=500&auto=format&fit=crop"
+                                    alt="Illustration"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="projects-section">
+                <div class="container">
+                    <div class="project-item left" data-speed="0.8">
+                        <div class="project-media">
+                            <video autoplay loop muted playsinline>
+                                <source src="https://cdn.pixabay.com/video/2020/05/26/40149-425114533_tiny.mp4"
+                                    type="video/mp4">
+                            </video>
+                        </div>
+                        <h3 class="project-title" data-i18n="proj1-title">APP INTERFACE</h3>
+                        <p class="project-desc" data-i18n="proj1-desc">Интерфейс мобильного приложения. Грамотное
+                            юзабилити.</p>
+                    </div>
+
+                    <div class="project-item right mt-huge" data-speed="1.25">
+                        <div class="project-media">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop"
+                                alt="Project 2">
+                        </div>
+                        <h3 class="project-title" data-i18n="proj2-title">BRAND IDENTITY</h3>
+                        <p class="project-desc" data-i18n="proj2-desc">Отрисовка логотипа и брендбука для корпорации.
+                        </p>
+                    </div>
+
+                    <div class="project-item center mt-large" data-speed="0.9">
+                        <div class="project-media">
+                            <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop"
+                                alt="Project 3">
+                        </div>
+                        <h3 class="project-title" data-i18n="proj3-title">WEB PLATFORM</h3>
+                        <p class="project-desc" data-i18n="proj3-desc">UX/UI дизайн для крупной веб-платформы.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section">
+                <div class="contact-bg" data-speed="0.8"></div>
+                <div class="container contact-content" data-speed="1.1">
+                    <h2 class="huge-title" data-i18n="contact-title">LET'S TALK</h2>
+                    <div class="contact-links">
+                        <a href="mailto:peterbarkun@gmail.com" class="brutal-link">peterbarkun@gmail.com</a>
+                        <a href="tel:+375292420759" class="brutal-link">+375 (29) 242-07-59</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.figma.com/@peter_barkun" target="_blank">Figma</a>
+                        <a href="https://www.behance.net/peterbarkun" target="_blank">Behance</a>
+                        <a href="https://t.me/peterbarkun" target="_blank">Telegram</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
