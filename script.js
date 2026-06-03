@@ -61,54 +61,72 @@ gridImgs.forEach((imgWrap, index) => {
 // GSAP Animations & Parallax
 gsap.registerPlugin(ScrollTrigger);
 
-// Lando Norris Block Interaction
-const landoBlock = document.querySelector('.lando-block');
-const landoHelmet = document.querySelector('.lando-helmet');
+// Animated Background Lines (Canvas)
+const canvas = document.getElementById('bg-canvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let lines = [];
 
-if (landoBlock && landoHelmet) {
-    landoBlock.addEventListener('mousemove', (e) => {
-        const rect = landoBlock.getBoundingClientRect();
-        // Calculate relative position (-1 to 1)
-        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        
-        // Move helmet slightly more to create parallax depth
-        gsap.to(landoHelmet, {
-            x: x * 30, 
-            y: y * 30,
-            rotationY: x * 10,
-            rotationX: -y * 10,
-            duration: 0.5,
-            ease: "power2.out"
-        });
-        
-        // Slightly move face in opposite direction
-        const faceImg = landoBlock.querySelector('.lando-face img');
-        if (faceImg) {
-            gsap.to(faceImg, {
-                x: -x * 10,
-                y: -y * 10,
-                scale: 1.05,
-                duration: 0.5,
-                ease: "power2.out"
-            });
-        }
-    });
+    function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    landoBlock.addEventListener('mouseleave', () => {
-        // Reset positions
-        gsap.to(landoHelmet, {
-            x: 0, y: 0, rotationY: 0, rotationX: 0,
-            duration: 1, ease: "elastic.out(1, 0.3)"
-        });
-        const faceImg = landoBlock.querySelector('.lando-face img');
-        if (faceImg) {
-            gsap.to(faceImg, {
-                x: 0, y: 0, scale: 1,
-                duration: 1, ease: "power2.out"
-            });
+    class Line {
+        constructor() {
+            this.reset();
         }
-    });
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height * 2 - height; 
+            this.length = Math.random() * 300 + 100;
+            this.speed = Math.random() * 1.5 + 0.5;
+            this.opacity = Math.random() * 0.4 + 0.1;
+            this.thickness = Math.random() * 1.5 + 0.5;
+        }
+        update() {
+            this.y -= this.speed;
+            if (this.y + this.length < 0) {
+                this.reset();
+                this.y = height + Math.random() * 100;
+                this.x = Math.random() * width;
+            }
+        }
+        draw() {
+            // Get accent color dynamically
+            const accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#FFBC00';
+            ctx.globalAlpha = this.opacity;
+            ctx.strokeStyle = accent;
+            ctx.lineWidth = this.thickness;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            // Slight curve for a more organic feel
+            ctx.quadraticCurveTo(this.x + 20, this.y + this.length / 2, this.x, this.y + this.length);
+            ctx.stroke();
+            ctx.globalAlpha = 1.0;
+        }
+    }
+
+    for (let i = 0; i < 30; i++) {
+        lines.push(new Line());
+    }
+
+    function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+        lines.forEach(line => {
+            line.update();
+            line.draw();
+        });
+        requestAnimationFrame(animateCanvas);
+    }
+    
+    animateCanvas();
 }
 
 
