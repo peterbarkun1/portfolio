@@ -362,7 +362,8 @@ nav {
     transition: color 0.3s ease;
     margin-bottom: 0.5rem;
 }
-.expertise-block:hover .expertise-label {
+.expertise-block:hover .expertise-label,
+.expertise-block.active .expertise-label {
     color: var(--accent);
 }
 
@@ -376,7 +377,8 @@ nav {
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     pointer-events: none;
 }
-.expertise-block:hover .expertise-desc {
+.expertise-block:hover .expertise-desc,
+.expertise-block.active .expertise-desc {
     opacity: 1;
     transform: translateY(0);
 }
@@ -388,7 +390,6 @@ nav {
     transform: translate(-50%, -50%);
     width: clamp(250px, 35vw, 500px);
     aspect-ratio: 1/1;
-    pointer-events: none;
     z-index: 5;
 }
 .media-grid {

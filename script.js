@@ -22,25 +22,40 @@ links.forEach(link => {
 // Expertise Section Interaction
 const expertiseBlocks = document.querySelectorAll('.expertise-block');
 const mediaGrid = document.querySelector('.media-grid');
+const gridImgs = document.querySelectorAll('.grid-img-wrap');
+
+function activateExpertise(id) {
+    mediaGrid.className = 'media-grid hover-' + id;
+    expertiseBlocks.forEach(b => {
+        if (b.getAttribute('data-hover') == id) {
+            b.classList.add('active');
+            const labelText = b.querySelector('.expertise-label').innerText;
+            cursorLabel.innerText = 'VIEW ' + labelText;
+            cursorLabel.classList.add('visible');
+        } else {
+            b.classList.remove('active');
+        }
+    });
+}
+
+function deactivateExpertise() {
+    mediaGrid.className = 'media-grid';
+    expertiseBlocks.forEach(b => b.classList.remove('active'));
+    cursorLabel.classList.remove('visible');
+}
 
 expertiseBlocks.forEach(block => {
     block.addEventListener('mouseenter', () => {
-        const hoverId = block.getAttribute('data-hover');
-        // Update Grid
-        mediaGrid.className = 'media-grid hover-' + hoverId;
-
-        // Update floating label
-        const labelText = block.querySelector('.expertise-label').innerText;
-        cursorLabel.innerText = 'VIEW ' + labelText;
-        cursorLabel.classList.add('visible');
+        activateExpertise(block.getAttribute('data-hover'));
     });
+    block.addEventListener('mouseleave', deactivateExpertise);
+});
 
-    block.addEventListener('mouseleave', () => {
-        // Revert Grid
-        mediaGrid.className = 'media-grid';
-        // Hide floating label
-        cursorLabel.classList.remove('visible');
+gridImgs.forEach((imgWrap, index) => {
+    imgWrap.addEventListener('mouseenter', () => {
+        activateExpertise(index + 1);
     });
+    imgWrap.addEventListener('mouseleave', deactivateExpertise);
 });
 
 // GSAP Animations & Parallax
