@@ -66,63 +66,80 @@ const canvas = document.getElementById('bg-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let width, height;
-    let lines = [];
+    let time = 0;
 
     function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        // Increase resolution for smooth rendering
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
     }
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    class Line {
-        constructor() {
-            this.reset();
-        }
-        reset() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height * 2 - height; 
-            this.length = Math.random() * 300 + 100;
-            this.speed = Math.random() * 1.5 + 0.5;
-            this.opacity = Math.random() * 0.4 + 0.1;
-            this.thickness = Math.random() * 1.5 + 0.5;
-        }
-        update() {
-            this.y -= this.speed;
-            if (this.y + this.length < 0) {
-                this.reset();
-                this.y = height + Math.random() * 100;
-                this.x = Math.random() * width;
-            }
-        }
-        draw() {
-            // Get accent color dynamically
-            const accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#FFBC00';
-            ctx.globalAlpha = this.opacity;
-            ctx.strokeStyle = accent;
-            ctx.lineWidth = this.thickness;
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            // Slight curve for a more organic feel
-            ctx.quadraticCurveTo(this.x + 20, this.y + this.length / 2, this.x, this.y + this.length);
-            ctx.stroke();
-            ctx.globalAlpha = 1.0;
-        }
-    }
-
-    for (let i = 0; i < 30; i++) {
-        lines.push(new Line());
+    // Custom fluid noise for Lando Norris style organic blobs
+    function getNoise(x, y, t) {
+        let n1 = Math.sin(x * 1.5 + t) * Math.cos(y * 1.5 + t * 0.8);
+        let n2 = Math.sin(x * 2.5 - t * 0.6) * Math.cos(y * 2.5 + t * 0.4) * 0.5;
+        return (n1 + n2) / 1.5; 
     }
 
     function animateCanvas() {
         ctx.clearRect(0, 0, width, height);
-        lines.forEach(line => {
-            line.update();
-            line.draw();
-        });
+
+        // Get dynamic line color from CSS variables (very faint)
+        const lineColor = getComputedStyle(document.body).getPropertyValue('--line-color').trim() || 'rgba(128, 128, 128, 0.1)'; 
+        
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 1.0; 
+        ctx.globalAlpha = 1.0;
+        
+        // Single giant topographic map approach
+        let centerX = width * 0.3;
+        let centerY = height * 0.3;
+        
+        let spacing = Math.max(width, height) / 5; // Very sparse, large rings
+        let maxRings = 15; // Enough to cover screen
+        let timeOffset = time * 0.0003;
+        
+        for (let r = 1; r <= maxRings; r++) {
+            let baseRadius = r * spacing;
+            ctx.beginPath();
+            
+            for (let angle = 0; angle <= Math.PI * 2.01; angle += 0.05) {
+                let nx = Math.cos(angle);
+                let ny = Math.sin(angle);
+                
+                let px_ideal = centerX + nx * baseRadius;
+                let py_ideal = centerY + ny * baseRadius;
+                
+                let noiseScale = 0.001; 
+                let n = getNoise(px_ideal * noiseScale, py_ideal * noiseScale, timeOffset);
+                
+                // Huge deformation to make them look like complex fluid blobs
+                let distortion = n * (spacing * 0.45); 
+                
+                let finalRadius = baseRadius + distortion;
+                if (finalRadius < 1) finalRadius = 1;
+                
+                let x = centerX + nx * finalRadius;
+                let y = centerY + ny * finalRadius;
+                
+                if (angle === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        
+        time += 16;
         requestAnimationFrame(animateCanvas);
     }
     
@@ -318,9 +335,11 @@ const savedTheme = localStorage.getItem('theme') || 'dark';
 
 function applyTheme(theme) {
     if (theme === 'light') {
+        document.documentElement.classList.add('theme-light');
         document.body.classList.add('theme-light');
         themeToggle.innerText = 'DARK';
     } else {
+        document.documentElement.classList.remove('theme-light');
         document.body.classList.remove('theme-light');
         themeToggle.innerText = 'LIGHT';
     }
