@@ -61,45 +61,56 @@ gridImgs.forEach((imgWrap, index) => {
 // GSAP Animations & Parallax
 gsap.registerPlugin(ScrollTrigger);
 
-// About Title Mask Reveal Logic
-const aboutTitleWrapper = document.querySelector('.about-title-wrapper');
-const aboutTitleMask = document.querySelector('.about-title-mask');
+// Lando Norris Block Interaction
+const landoBlock = document.querySelector('.lando-block');
+const landoHelmet = document.querySelector('.lando-helmet');
 
-if (aboutTitleWrapper && aboutTitleMask) {
-    // We use GSAP quickTo for highly performant continuous updates
-    const setX = gsap.quickTo(aboutTitleMask, "--x", {duration: 0.4, ease: "power3"});
-    const setY = gsap.quickTo(aboutTitleMask, "--y", {duration: 0.4, ease: "power3"});
-    
-    aboutTitleWrapper.addEventListener('mousemove', (e) => {
-        const rect = aboutTitleWrapper.getBoundingClientRect();
-        // Calculate relative position within the wrapper
-        const relX = e.clientX - rect.left;
-        const relY = e.clientY - rect.top;
+if (landoBlock && landoHelmet) {
+    landoBlock.addEventListener('mousemove', (e) => {
+        const rect = landoBlock.getBoundingClientRect();
+        // Calculate relative position (-1 to 1)
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
         
-        setX(relX + "px");
-        setY(relY + "px");
+        // Move helmet slightly more to create parallax depth
+        gsap.to(landoHelmet, {
+            x: x * 30, 
+            y: y * 30,
+            rotationY: x * 10,
+            rotationX: -y * 10,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+        
+        // Slightly move face in opposite direction
+        const faceImg = landoBlock.querySelector('.lando-face img');
+        if (faceImg) {
+            gsap.to(faceImg, {
+                x: -x * 10,
+                y: -y * 10,
+                scale: 1.05,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        }
     });
 
-    aboutTitleWrapper.addEventListener('mouseenter', () => {
-        gsap.to(aboutTitleMask, {
-            "--mask-size": "200px", // Size of the mask reveal
-            duration: 0.5,
-            ease: "back.out(1.5)"
+    landoBlock.addEventListener('mouseleave', () => {
+        // Reset positions
+        gsap.to(landoHelmet, {
+            x: 0, y: 0, rotationY: 0, rotationX: 0,
+            duration: 1, ease: "elastic.out(1, 0.3)"
         });
-        cursor.classList.add('hover');
-        cursorLabel.style.display = 'none'; // hide label just in case
-    });
-
-    aboutTitleWrapper.addEventListener('mouseleave', () => {
-        gsap.to(aboutTitleMask, {
-            "--mask-size": "0px",
-            duration: 0.5,
-            ease: "power3.inOut"
-        });
-        cursor.classList.remove('hover');
-        cursorLabel.style.display = 'block';
+        const faceImg = landoBlock.querySelector('.lando-face img');
+        if (faceImg) {
+            gsap.to(faceImg, {
+                x: 0, y: 0, scale: 1,
+                duration: 1, ease: "power2.out"
+            });
+        }
     });
 }
+
 
 // Custom smooth parallax implementation for data-speed elements
 const parallaxElements = document.querySelectorAll('[data-speed]');
