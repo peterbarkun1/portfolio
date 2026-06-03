@@ -77,7 +77,7 @@ if (canvas) {
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
     }
-    
+
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
@@ -85,50 +85,50 @@ if (canvas) {
     function getNoise(x, y, t) {
         let n1 = Math.sin(x * 1.5 + t) * Math.cos(y * 1.5 + t * 0.8);
         let n2 = Math.sin(x * 2.5 - t * 0.6) * Math.cos(y * 2.5 + t * 0.4) * 0.5;
-        return (n1 + n2) / 1.5; 
+        return (n1 + n2) / 1.5;
     }
 
     function animateCanvas() {
         ctx.clearRect(0, 0, width, height);
 
         // Get dynamic line color from CSS variables (very faint)
-        const lineColor = getComputedStyle(document.body).getPropertyValue('--line-color').trim() || 'rgba(128, 128, 128, 0.1)'; 
-        
+        const lineColor = getComputedStyle(document.body).getPropertyValue('--line-color').trim() || 'rgba(128, 128, 128, 0.1)';
+
         ctx.strokeStyle = lineColor;
-        ctx.lineWidth = 1.0; 
+        ctx.lineWidth = 1.0;
         ctx.globalAlpha = 1.0;
-        
+
         // Single giant topographic map approach
         let centerX = width * 0.3;
         let centerY = height * 0.3;
-        
+
         let spacing = Math.max(width, height) / 5; // Very sparse, large rings
         let maxRings = 15; // Enough to cover screen
         let timeOffset = time * 0.0003;
-        
+
         for (let r = 1; r <= maxRings; r++) {
             let baseRadius = r * spacing;
             ctx.beginPath();
-            
+
             for (let angle = 0; angle <= Math.PI * 2.01; angle += 0.05) {
                 let nx = Math.cos(angle);
                 let ny = Math.sin(angle);
-                
+
                 let px_ideal = centerX + nx * baseRadius;
                 let py_ideal = centerY + ny * baseRadius;
-                
-                let noiseScale = 0.001; 
+
+                let noiseScale = 0.001;
                 let n = getNoise(px_ideal * noiseScale, py_ideal * noiseScale, timeOffset);
-                
+
                 // Huge deformation to make them look like complex fluid blobs
-                let distortion = n * (spacing * 0.45); 
-                
+                let distortion = n * (spacing * 0.45);
+
                 let finalRadius = baseRadius + distortion;
                 if (finalRadius < 1) finalRadius = 1;
-                
+
                 let x = centerX + nx * finalRadius;
                 let y = centerY + ny * finalRadius;
-                
+
                 if (angle === 0) {
                     ctx.moveTo(x, y);
                 } else {
@@ -138,11 +138,11 @@ if (canvas) {
             ctx.closePath();
             ctx.stroke();
         }
-        
+
         time += 16;
         requestAnimationFrame(animateCanvas);
     }
-    
+
     animateCanvas();
 }
 
@@ -174,20 +174,22 @@ parallaxElements.forEach(el => {
     );
 });
 
-// Fade in projects
-const projects = document.querySelectorAll('.project-item');
-projects.forEach(project => {
-    gsap.from(project.querySelector('.project-title'), {
+// Fade in projects grid
+const projectsGrid = document.querySelector('.projects-grid');
+if (projectsGrid) {
+    gsap.from(projectsGrid.querySelectorAll('.project-card'), {
         opacity: 0,
-        y: 30,
-        duration: 1,
+        y: 50,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
-            trigger: project,
-            start: "top 75%",
+            trigger: projectsGrid,
+            start: "top 85%",
             toggleActions: "play none none reverse"
         }
     });
-});
+}
 
 // Header scroll effect
 const header = document.querySelector('.brutal-header');
@@ -207,7 +209,7 @@ const translations = {
         "nav-about": "Обо мне",
         "nav-projects": "Работы",
         "nav-contact": "Контакты",
-        "hero-title": "DIGITAL<br>CRAFTER",
+        "hero-title": "КРЕАТИВНЫЙ<br>ДИЗАЙНЕР",
         "hero-sub1": "Меня зовут Пётр Баркун.",
         "hero-sub2": "Я создаю цифровое будущее.",
         "about-title": "ИННОВАЦИИ<br>В КАЖДОМ<br>ПИКСЕЛЕ.",
@@ -215,7 +217,7 @@ const translations = {
         "about-li1": "Возраст: 27 лет",
         "about-li2": "Проживаю: Минск, Беларусь",
         "about-li3": "AI, Figma, Illustrator, HTML5-баннеры",
-        "exp-title": "Вместо того чтобы подстраиваться<br>под изменения, я их создаю.",
+        "exp-title": "Это не просто профессия,<br>это образ мышления.",
         "exp-btn": "СМОТРЕТЬ РАБОТЫ",
         "exp-label1": "UX/UI",
         "exp-desc1": "ПРОЕКТИРУЮ ИНТЕРФЕЙСЫ,<br>КОТОРЫЕ ВПЕЧАТЛЯЮТ И РАБОТАЮТ.",
@@ -238,7 +240,7 @@ const translations = {
         "nav-about": "About",
         "nav-projects": "Works",
         "nav-contact": "Contact",
-        "hero-title": "DIGITAL<br>CRAFTER",
+        "hero-title": "CREATIVE<br>DESIGNER",
         "hero-sub1": "My name is Peter Barkun.",
         "hero-sub2": "I shape the digital future.",
         "about-title": "INNOVATION<br>IN EVERY<br>PIXEL.",
@@ -246,7 +248,7 @@ const translations = {
         "about-li1": "Age: 27",
         "about-li2": "Location: Minsk, Belarus",
         "about-li3": "AI, Figma, Illustrator, HTML5-banners",
-        "exp-title": "Instead of adapting to change,<br>we shape it.",
+        "exp-title": "It’s not just a profession,<br>it’s a way of thinking.",
         "exp-btn": "SEE OUR WORK",
         "exp-label1": "UX/UI",
         "exp-desc1": "I DESIGN INTERFACES<br>THAT IMPRESS AND WORK.",
@@ -269,16 +271,15 @@ const translations = {
         "nav-about": "Пра мяне",
         "nav-projects": "Работы",
         "nav-contact": "Кантакты",
-        "hero-title": "DIGITAL<br>CRAFTER",
-        "hero-sub1": "Мяне клiчуць Пётр Баркун.",
-
+        "hero-title": "КРЕАТЫЎНЫ<br>ДЫЗАЙНЕР",
+        "hero-sub1": "Мяне клічуць Пётр Баркун.",
         "hero-sub2": "Я ствараю лічбавую будучыню.",
         "about-title": "ІНАВАЦЫІ<br>Ў КОЖНЫМ<br>ПІКСЕЛІ.",
         "about-desc": "Спецыяліст па камп'ютарнай графіцы з 8-гадовым вопытам. Праектую мабільныя і вэб-інтэрфейсы, якія працуюць і ўражваюць. Ствараю рэкламныя банеры, лагатыпы брэндбукі і многае іншае.",
         "about-li1": "Узрост: 27 гадоў",
         "about-li2": "Месцазнаходжанне: Мінск, Беларусь",
         "about-li3": "AI, Figma, Illustrator, HTML5-банеры",
-        "exp-title": "Замест таго каб падладжвацца<br>пад змены, я іх ствараю.",
+        "exp-title": "Гэта не проста прафесія,<br>гэта лад мыслення.",
         "exp-btn": "ГЛЯДЗЕЦЬ РАБОТЫ",
         "exp-label1": "UX/UI",
         "exp-desc1": "ПРАЕКТУЮ ІНТЭРФЕЙСЫ,<br>ЯКІЯ ЎРАЖВАЮЦЬ І ПРАЦУЮЦЬ.",

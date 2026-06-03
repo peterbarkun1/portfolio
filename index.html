@@ -74,7 +74,47 @@
                             <ul class="brutal-list">
                                 <li data-i18n="about-li1">Возраст: 27 лет</li>
                                 <li data-i18n="about-li2">Проживаю: Минск, Беларусь</li>
-                                <li data-i18n="about-li3">Figma, Illustrator, HTML5-баннеры</li>
+                                <li style="border-bottom: none; padding-bottom: 0; padding-top: 1.5rem;">
+                                    <div class="tools-chips">
+                                        <div class="tool-chip">
+                                            <svg class="tool-icon" viewBox="0 0 24 24" fill="none" stroke="#A259FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                                            </svg>
+                                            <span>AI</span>
+                                        </div>
+                                        <div class="tool-chip">
+                                            <svg class="tool-icon figma-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57">
+                                                <path fill="#f24e1e" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/>
+                                                <path fill="#ff7262" d="M0 47.5a9.5 9.5 0 0 1 9.5-9.5H19v19H9.5A9.5 9.5 0 0 1 0 47.5z"/>
+                                                <path fill="#1abcfe" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/>
+                                                <path fill="#0acf83" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/>
+                                                <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/>
+                                            </svg>
+                                            <span>Figma</span>
+                                        </div>
+                                        <div class="tool-chip">
+                                            <div class="tool-icon ai-logo">Ai</div>
+                                            <span>Illustrator</span>
+                                        </div>
+                                        <div class="tool-chip">
+                                            <div class="tool-icon ps-logo">Ps</div>
+                                            <span>Photoshop</span>
+                                        </div>
+                                        <div class="tool-chip">
+                                            <div class="tool-icon corel-logo">Cd</div>
+                                            <span>Corel Draw</span>
+                                        </div>
+                                        <div class="tool-chip">
+                                            <svg class="tool-icon html-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill="#e34f26" d="M71,460 L30,4 L482,4 L441,460 L256,512 Z"/>
+                                                <path fill="#ef652a" d="M256,472 L405,431 L440,37 L256,37 Z"/>
+                                                <path fill="#ebebeb" d="M256,208 L181,208 L176,150 L256,150 L256,94 L112,94 L127,264 L256,264 Z M256,355 L255,355 L192,338 L188,293 L132,293 L139,382 L255,414 L256,414 Z"/>
+                                                <path fill="#ffffff" d="M255,208 L255,264 L325,264 L318,338 L255,355 L255,414 L371,382 L385,208 Z M255,94 L255,150 L390,150 L395,94 Z"/>
+                                            </svg>
+                                            <span data-i18n="tool-banners">HTML5-баннеры</span>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="about-img" data-speed="0.7">
@@ -142,35 +182,89 @@
             <!-- Projects Section -->
             <section id="projects" class="projects-section">
                 <div class="container">
-                    <div class="project-item left" data-speed="0.8">
-                        <div class="project-media">
-                            <video autoplay loop muted playsinline>
-                                <source src="https://cdn.pixabay.com/video/2020/05/26/40149-425114533_tiny.mp4"
-                                    type="video/mp4">
-                            </video>
+                    <h2 class="brutal-title center" style="text-align: center; margin-bottom: 2rem;" data-i18n="nav-projects">РАБОТЫ</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/179743/brendirovannaia-test-draiv-livreia-byd-yuan-up" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/files/23/22375/COVER/0f9d0714-dee8-4602-9bb1-390bf8f39a66_1700059571.png" alt="Брендированная тест-драйв ливрея BYD Yuan Up">
+                                <div class="card-info">
+                                    <h3>Ливрея BYD Yuan Up</h3>
+                                    <p>Брендированная тест-драйв ливрея.</p>
+                                </div>
+                            </a>
                         </div>
-                        <h3 class="project-title" data-i18n="proj1-title">APP INTERFACE</h3>
-                        <p class="project-desc" data-i18n="proj1-desc">Интерфейс мобильного приложения. Грамотное
-                            юзабилити.</p>
-                    </div>
-
-                    <div class="project-item right mt-huge" data-speed="1.25">
-                        <div class="project-media">
-                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop"
-                                alt="Project 2">
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/179741/brendirovannaia-livreia-i-reklamnye-materialy-dlia-iventa-a-fest-na-stadione-dinamo-minsk" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/files/23/22375/COVER/d7455e2e-37b6-409b-9eb2-64a9b0b1e87e_1323548031.png" alt="А-фест Динамо-Минск">
+                                <div class="card-info">
+                                    <h3>А-фест Динамо-Минск</h3>
+                                    <p>Ливрея и рекламные материалы.</p>
+                                </div>
+                            </a>
                         </div>
-                        <h3 class="project-title" data-i18n="proj2-title">BRAND IDENTITY</h3>
-                        <p class="project-desc" data-i18n="proj2-desc">Отрисовка логотипа и брендбука для корпорации.
-                        </p>
-                    </div>
-
-                    <div class="project-item center mt-large" data-speed="0.9">
-                        <div class="project-media">
-                            <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop"
-                                alt="Project 3">
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/156381/reklamnye-kreativy-dlia-kompanii-atlant-m" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/files/23/22375/COVER/1d40951f-f9ec-4617-9e5a-7a1bc36a837d_2054035764.png" alt="Рекламные креативы Атлант-М">
+                                <div class="card-info">
+                                    <h3>Креативы Атлант-М</h3>
+                                    <p>Рекламные креативы для компании.</p>
+                                </div>
+                            </a>
                         </div>
-                        <h3 class="project-title" data-i18n="proj3-title">WEB PLATFORM</h3>
-                        <p class="project-desc" data-i18n="proj3-desc">UX/UI дизайн для крупной веб-платформы.</p>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/54869/avtokalkuliator" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/54869/13f6bfc06df9d1151657e7a1f98f3b3b67fb766a.png" alt="Автокалькулятор">
+                                <div class="card-info">
+                                    <h3>Автокалькулятор</h3>
+                                    <p>Дизайн интерфейса.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/54867/coev-logotip-i-prezentaciia-dlia-startapa" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/54867/616cbc367951fdc27ac4a95a5e8db6b2cf42b1c9.png" alt="COEV">
+                                <div class="card-info">
+                                    <h3>COEV</h3>
+                                    <p>Логотип и презентация стартапа.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/38127/tematiceskoe-ux-issledovanie-bronirovanie-tovara" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/38127/304419ddab4beb42b5ecb0de0f65ca78cd3b0560.png" alt="UX-исследование">
+                                <div class="card-info">
+                                    <h3>UX-исследование</h3>
+                                    <p>Бронирование товара.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/38339/redizain-upakovki-kultovyx-sovetskix-produktov" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/38339/d049cee5324c05fd63a8a7666e9e37770924f286.png" alt="Редизайн упаковки">
+                                <div class="card-info">
+                                    <h3>Редизайн упаковки</h3>
+                                    <p>Культовые советские продукты.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/38336/servis-ev-compare" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/38336/d6517efe1f91a492d6bf4bb705a326f2304bfa22.png" alt="EV Compare">
+                                <div class="card-info">
+                                    <h3>EV Compare</h3>
+                                    <p>Дизайн сервиса EV Compare.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="project-card">
+                            <a href="https://dprofile.ru/case/38144/susi-vesla-redizain" target="_blank" class="project-media">
+                                <img src="https://cdn.dprofile.ru/public/22375/38144/338992e93a30d888fb398be4354a3ed4e92268c6.png" alt="Суши Весла">
+                                <div class="card-info">
+                                    <h3>Суши Весла</h3>
+                                    <p>Редизайн сервиса доставки.</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
