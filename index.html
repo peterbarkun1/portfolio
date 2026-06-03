@@ -69,8 +69,20 @@
             <!-- Text Section -->
             <section id="about" class="text-section">
                 <div class="container">
-                    <h2 class="brutal-title" data-speed="0.9" data-i18n="about-title">ИННОВАЦИИ<br>В КАЖДОМ<br>ПИКСЕЛЕ.
-                    </h2>
+                    <div class="about-title-wrapper" data-speed="0.9">
+                        <!-- Default layer -->
+                        <h2 class="brutal-title" data-i18n="about-title">ИННОВАЦИИ<br>В КАЖДОМ<br>ПИКСЕЛЕ.</h2>
+                        
+                        <!-- Masked reveal layer -->
+                        <div class="about-title-mask">
+                            <div class="about-mask-bg">
+                                <!-- Placeholder profile photo for the user to replace -->
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" alt="Peter Barkun Placeholder">
+                            </div>
+                            <h2 class="brutal-title filled" data-i18n="about-title">ИННОВАЦИИ<br>В КАЖДОМ<br>ПИКСЕЛЕ.</h2>
+                        </div>
+                    </div>
+                    
                     <div class="about-grid">
                         <div class="about-text" data-speed="1.1">
                             <p data-i18n="about-desc">Специалист по компьютерной графике с 8-летним опытом. Проектирую

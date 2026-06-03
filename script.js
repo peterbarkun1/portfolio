@@ -61,6 +61,46 @@ gridImgs.forEach((imgWrap, index) => {
 // GSAP Animations & Parallax
 gsap.registerPlugin(ScrollTrigger);
 
+// About Title Mask Reveal Logic
+const aboutTitleWrapper = document.querySelector('.about-title-wrapper');
+const aboutTitleMask = document.querySelector('.about-title-mask');
+
+if (aboutTitleWrapper && aboutTitleMask) {
+    // We use GSAP quickTo for highly performant continuous updates
+    const setX = gsap.quickTo(aboutTitleMask, "--x", {duration: 0.4, ease: "power3"});
+    const setY = gsap.quickTo(aboutTitleMask, "--y", {duration: 0.4, ease: "power3"});
+    
+    aboutTitleWrapper.addEventListener('mousemove', (e) => {
+        const rect = aboutTitleWrapper.getBoundingClientRect();
+        // Calculate relative position within the wrapper
+        const relX = e.clientX - rect.left;
+        const relY = e.clientY - rect.top;
+        
+        setX(relX + "px");
+        setY(relY + "px");
+    });
+
+    aboutTitleWrapper.addEventListener('mouseenter', () => {
+        gsap.to(aboutTitleMask, {
+            "--mask-size": "200px", // Size of the mask reveal
+            duration: 0.5,
+            ease: "back.out(1.5)"
+        });
+        cursor.classList.add('hover');
+        cursorLabel.style.display = 'none'; // hide label just in case
+    });
+
+    aboutTitleWrapper.addEventListener('mouseleave', () => {
+        gsap.to(aboutTitleMask, {
+            "--mask-size": "0px",
+            duration: 0.5,
+            ease: "power3.inOut"
+        });
+        cursor.classList.remove('hover');
+        cursorLabel.style.display = 'block';
+    });
+}
+
 // Custom smooth parallax implementation for data-speed elements
 const parallaxElements = document.querySelectorAll('[data-speed]');
 
