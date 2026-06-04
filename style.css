@@ -389,7 +389,8 @@ nav {
 
 /* Specific overrides for multicolor SVGs on hover */
 .tool-chip:hover .figma-icon path,
-.tool-chip:hover .html-icon path {
+.tool-chip:hover .html-icon path,
+.tool-chip:hover .gemini-icon path {
     fill: var(--bg-color) !important;
 }
 
@@ -416,6 +417,46 @@ nav {
 }
 
 .tool-chip:hover .ai-logo {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    border-color: var(--bg-color);
+}
+
+.gwd-logo {
+    background: #FFFFFF;
+    color: #4285F4;
+    font-weight: 900;
+    font-size: 11px;
+    border-radius: 4px;
+    border: 1px solid #4285F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.tool-chip:hover .gwd-logo {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    border-color: var(--bg-color);
+}
+
+.as-logo {
+    background: #3DDC84;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 11px;
+    border-radius: 4px;
+    border: 1px solid #3DDC84;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.tool-chip:hover .as-logo {
     background: var(--bg-color);
     color: var(--text-primary);
     border-color: var(--bg-color);
@@ -681,9 +722,7 @@ nav {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 30px;
-    row-gap: 0;
-    grid-auto-rows: 1px;
+    gap: 30px;
     margin-top: 2rem;
     align-items: start;
 }
@@ -725,7 +764,6 @@ nav {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
@@ -891,7 +929,7 @@ nav {
         align-items: flex-start;
         gap: 3rem;
     }
-    
+
     .contact-right {
         flex: auto;
         padding-left: 0;

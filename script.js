@@ -222,7 +222,7 @@ const translations = {
         "about-li2": "Проживаю: Минск, Беларусь",
         "about-li3": "AI, Figma, Illustrator, HTML5-баннеры",
         "exp-title": "Это не просто профессия,<br>это образ мышления.",
-        "exp-btn": "СМОТРЕТЬ РАБОТЫ",
+        "exp-btn": "СМОТРЕТЬ ПРОЕКТЫ",
         "exp-label1": "UX/UI",
         "exp-desc1": "ПРОЕКТИРУЮ ИНТЕРФЕЙСЫ,<br>КОТОРЫЕ ВПЕЧАТЛЯЮТ И РАБОТАЮТ.",
         "exp-label2": "WEB",
@@ -253,7 +253,7 @@ const translations = {
         "about-li2": "Location: Minsk, Belarus",
         "about-li3": "AI, Figma, Illustrator, HTML5-banners",
         "exp-title": "It’s not just a profession,<br>it’s a way of thinking.",
-        "exp-btn": "SEE OUR WORK",
+        "exp-btn": "SEE PROJECTS",
         "exp-label1": "UX/UI",
         "exp-desc1": "I DESIGN INTERFACES<br>THAT IMPRESS AND WORK.",
         "exp-label2": "WEB",
@@ -377,31 +377,3 @@ document.querySelectorAll('.lang-btn, .theme-btn').forEach(btn => {
 // Init
 applyLanguage(savedLang);
 applyTheme(savedTheme);
-
-// Masonry Grid Logic
-function resizeGridItem(item) {
-    const content = item.querySelector('.project-media');
-    const img = content.querySelector('img');
-    
-    function setSpan() {
-        const contentHeight = content.getBoundingClientRect().height;
-        // 30 is the vertical gap in pixels we want between items
-        const rowSpan = Math.ceil(contentHeight + 30);
-        item.style.gridRowEnd = "span " + rowSpan;
-    }
-    
-    if (img.complete) {
-        setSpan();
-    } else {
-        img.addEventListener('load', setSpan);
-    }
-}
-
-function resizeAllGridItems() {
-    const allItems = document.querySelectorAll('.project-card');
-    allItems.forEach(item => resizeGridItem(item));
-}
-
-window.addEventListener("load", resizeAllGridItems);
-window.addEventListener("resize", resizeAllGridItems);
-resizeAllGridItems();
