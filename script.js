@@ -211,7 +211,7 @@ const translations = {
     ru: {
         "marquee": "UX/UI ✦ WEB-ДИЗАЙН ✦ ЛОГОТИПЫ ✦ ИЛЛЮСТРАЦИИ ✦ РЕКЛАМНЫЕ МАТЕРИАЛЛЫ ✦",
         "nav-about": "Обо мне",
-        "nav-projects": "Работы",
+        "nav-projects": "Проекты",
         "nav-contact": "Контакты",
         "hero-title": "КРЕАТИВНЫЙ<br>ДИЗАЙНЕР",
         "hero-sub1": "Меня зовут Пётр Баркун.",
@@ -242,7 +242,7 @@ const translations = {
     en: {
         "marquee": "UX/UI ✦ WEB DESIGN ✦ LOGOS ✦ ILLUSTRATION ✦ ADS ✦",
         "nav-about": "About",
-        "nav-projects": "Works",
+        "nav-projects": "Cases",
         "nav-contact": "Contact",
         "hero-title": "CREATIVE<br>DESIGNER",
         "hero-sub1": "My name is Peter Barkun.",
@@ -273,7 +273,7 @@ const translations = {
     be: {
         "marquee": "UX/UI ✦ WEB-ДЫЗАЙН ✦ ЛАГАТЫПЫ ✦ ІЛЮСТРАЦЫІ ✦ РЭКЛАМНЫЯ МАТЭРЫЯЛЛЫ ✦",
         "nav-about": "Пра мяне",
-        "nav-projects": "Работы",
+        "nav-projects": "Праекты",
         "nav-contact": "Кантакты",
         "hero-title": "КРЕАТЫЎНЫ<br>ДЫЗАЙНЕР",
         "hero-sub1": "Мяне клічуць Пётр Баркун.",
@@ -284,7 +284,7 @@ const translations = {
         "about-li2": "Месцазнаходжанне: Мінск, Беларусь",
         "about-li3": "AI, Figma, Illustrator, HTML5-банеры",
         "exp-title": "Гэта не проста прафесія,<br>гэта лад мыслення.",
-        "exp-btn": "ГЛЯДЗЕЦЬ РАБОТЫ",
+        "exp-btn": " ГЛЯДЗЕЦЬ ПРАЕКТЫ",
         "exp-label1": "UX/UI",
         "exp-desc1": "ПРАЕКТУЮ ІНТЭРФЕЙСЫ,<br>ЯКІЯ ЎРАЖВАЮЦЬ І ПРАЦУЮЦЬ.",
         "exp-label2": "WEB",
@@ -358,7 +358,7 @@ function applyTheme(theme) {
 themeToggle.addEventListener('click', () => {
     const isLight = document.body.classList.contains('theme-light');
     const newTheme = isLight ? 'dark' : 'light';
-    
+
     if (!document.startViewTransition) {
         applyTheme(newTheme);
     } else {
@@ -377,3 +377,31 @@ document.querySelectorAll('.lang-btn, .theme-btn').forEach(btn => {
 // Init
 applyLanguage(savedLang);
 applyTheme(savedTheme);
+
+// Masonry Grid Logic
+function resizeGridItem(item) {
+    const content = item.querySelector('.project-media');
+    const img = content.querySelector('img');
+    
+    function setSpan() {
+        const contentHeight = content.getBoundingClientRect().height;
+        // 30 is the vertical gap in pixels we want between items
+        const rowSpan = Math.ceil(contentHeight + 30);
+        item.style.gridRowEnd = "span " + rowSpan;
+    }
+    
+    if (img.complete) {
+        setSpan();
+    } else {
+        img.addEventListener('load', setSpan);
+    }
+}
+
+function resizeAllGridItems() {
+    const allItems = document.querySelectorAll('.project-card');
+    allItems.forEach(item => resizeGridItem(item));
+}
+
+window.addEventListener("load", resizeAllGridItems);
+window.addEventListener("resize", resizeAllGridItems);
+resizeAllGridItems();
