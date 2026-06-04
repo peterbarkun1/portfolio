@@ -89,6 +89,10 @@ if (canvas) {
     }
 
     function animateCanvas() {
+        if (document.hidden) {
+            requestAnimationFrame(animateCanvas);
+            return;
+        }
         ctx.clearRect(0, 0, width, height);
 
         // Get dynamic line color from CSS variables (very faint)
@@ -339,17 +343,29 @@ function applyTheme(theme) {
         document.documentElement.classList.add('theme-light');
         document.body.classList.add('theme-light');
         themeToggle.innerText = 'DARK';
+        const metaThemeColor = document.getElementById('meta-theme-color');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#fafafa');
     } else {
         document.documentElement.classList.remove('theme-light');
         document.body.classList.remove('theme-light');
         themeToggle.innerText = 'LIGHT';
+        const metaThemeColor = document.getElementById('meta-theme-color');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#050505');
     }
     localStorage.setItem('theme', theme);
 }
 
 themeToggle.addEventListener('click', () => {
     const isLight = document.body.classList.contains('theme-light');
-    applyTheme(isLight ? 'dark' : 'light');
+    const newTheme = isLight ? 'dark' : 'light';
+    
+    if (!document.startViewTransition) {
+        applyTheme(newTheme);
+    } else {
+        document.startViewTransition(() => {
+            applyTheme(newTheme);
+        });
+    }
 });
 
 // Cursor link hover update for UI controls

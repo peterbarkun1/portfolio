@@ -52,6 +52,7 @@
     --border-color: #222;
     --cursor-color: #fff;
     --line-color: rgba(255, 255, 255, 0.08);
+    color-scheme: dark;
 }
 
 .theme-light {
@@ -60,6 +61,7 @@
     --border-color: #ccc;
     --cursor-color: #000;
     --line-color: rgba(0, 0, 0, 0.08);
+    color-scheme: light;
 }
 
 * {
@@ -75,6 +77,8 @@ body {
     font-family: var(--font-main);
     overflow-x: hidden;
     cursor: none;
+    scrollbar-color: var(--border-color) var(--bg-color);
+    scrollbar-width: thin;
 }
 
 a {
@@ -248,6 +252,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: -0.05em;
     margin: 0;
+    text-wrap: balance;
 }
 
 .brutal-title {
@@ -255,6 +260,7 @@ nav {
     font-weight: 900;
     line-height: 0.99;
     text-transform: uppercase;
+    text-wrap: balance;
 }
 
 .container {
@@ -333,6 +339,7 @@ nav {
 .about-text {
     font-size: clamp(1.2rem, 2vw, 2rem);
     line-height: 1.4;
+    text-wrap: pretty;
 }
 
 .brutal-list {
@@ -779,6 +786,25 @@ nav {
 .contact-content {
     position: relative;
     z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 4rem;
+}
+
+.contact-left {
+    flex: 1;
+}
+
+.contact-right {
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    padding-left: 3rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .contact-links {
@@ -837,7 +863,42 @@ nav {
     color: var(--accent);
 }
 
-@media (max-width: 768px) {
+.legal-block p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.legal-bold {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem !important;
+    color: #fff;
+}
+
+.legal-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 992px) {
+    .contact-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+    
+    .contact-right {
+        flex: auto;
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        padding-top: 2rem;
+        width: 100%;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
     }
