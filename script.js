@@ -178,22 +178,6 @@ parallaxElements.forEach(el => {
     );
 });
 
-// Fade in projects grid
-const projectsGrid = document.querySelector('.projects-grid');
-if (projectsGrid) {
-    gsap.from(projectsGrid.querySelectorAll('.project-card'), {
-        opacity: 0,
-        y: 50,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: projectsGrid,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-        }
-    });
-}
 
 // Header scroll effect
 const header = document.querySelector('.brutal-header');
@@ -211,8 +195,8 @@ const translations = {
     ru: {
         "marquee": "UX/UI ✦ WEB-ДИЗАЙН ✦ ЛОГОТИПЫ ✦ ИЛЛЮСТРАЦИИ ✦ РЕКЛАМНЫЕ МАТЕРИАЛЛЫ ✦",
         "nav-about": "Обо мне",
-        "nav-projects": "Проекты",
-        "nav-contact": "Контакты",
+        "nav-projects": "ПРОЕКТЫ",
+        "nav-contact": "КОНТАКТЫ",
         "hero-title": "КРЕАТИВНЫЙ<br>ДИЗАЙНЕР",
         "hero-sub1": "Меня зовут Пётр Баркун.",
         "hero-sub2": "Я создаю цифровое будущее.",
@@ -242,8 +226,8 @@ const translations = {
     en: {
         "marquee": "UX/UI ✦ WEB DESIGN ✦ LOGOS ✦ ILLUSTRATION ✦ ADS ✦",
         "nav-about": "About",
-        "nav-projects": "Cases",
-        "nav-contact": "Contact",
+        "nav-projects": "PROJECTS",
+        "nav-contact": "CONTACT",
         "hero-title": "CREATIVE<br>DESIGNER",
         "hero-sub1": "My name is Peter Barkun.",
         "hero-sub2": "I shape the digital future.",
@@ -273,8 +257,8 @@ const translations = {
     be: {
         "marquee": "UX/UI ✦ WEB-ДЫЗАЙН ✦ ЛАГАТЫПЫ ✦ ІЛЮСТРАЦЫІ ✦ РЭКЛАМНЫЯ МАТЭРЫЯЛЛЫ ✦",
         "nav-about": "Пра мяне",
-        "nav-projects": "Праекты",
-        "nav-contact": "Кантакты",
+        "nav-projects": "ПРАЕКТЫ",
+        "nav-contact": "КАНТАКТЫ",
         "hero-title": "КРЕАТЫЎНЫ<br>ДЫЗАЙНЕР",
         "hero-sub1": "Мяне клічуць Пётр Баркун.",
         "hero-sub2": "Я ствараю лічбавую будучыню.",
@@ -373,6 +357,45 @@ document.querySelectorAll('.lang-btn, .theme-btn').forEach(btn => {
     btn.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     btn.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
 });
+
+// Marquee Animations with Scroll Velocity
+function initMarquee(selector, duration) {
+    const tracks = document.querySelectorAll(selector);
+    if (tracks.length > 0) {
+        const tween = gsap.to(tracks, {
+            xPercent: -100,
+            repeat: -1,
+            duration: duration,
+            ease: "none"
+        });
+
+        ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: (self) => {
+                let velocity = self.getVelocity();
+                let targetTimeScale = 1 + Math.abs(velocity) / 200;
+                targetTimeScale = Math.min(Math.max(targetTimeScale, 1), 10);
+
+                gsap.to(tween, {
+                    timeScale: targetTimeScale,
+                    duration: 0.2,
+                    overwrite: true,
+                    onComplete: () => {
+                        gsap.to(tween, {
+                            timeScale: 1,
+                            duration: 1.5,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+            }
+        });
+    }
+}
+
+initMarquee('.clients-track', 35);
+initMarquee('.testimonials-track', 55); // Slower duration for better readability
 
 // Init
 applyLanguage(savedLang);

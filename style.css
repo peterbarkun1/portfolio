@@ -720,33 +720,38 @@ nav {
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     margin-top: 2rem;
-    align-items: start;
-}
-
-@media (max-width: 992px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 576px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
+    justify-content: center;
 }
 
 .project-card {
     position: relative;
-    width: 100%;
+    width: calc(33.333% - 20px);
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
     border-radius: 12px;
     overflow: hidden;
     background: #111;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .project-card {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 576px) {
+    .project-card {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .project-card:hover {
@@ -756,13 +761,17 @@ nav {
 }
 
 .project-card .project-media {
-    display: block;
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     display: block;
     transition: transform 0.5s ease;
 }
@@ -782,6 +791,7 @@ nav {
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    z-index: 10;
 }
 
 .project-card:hover .card-info {
@@ -798,6 +808,137 @@ nav {
 .project-card p {
     font-size: 0.85rem;
     opacity: 0.8;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 5vw 0 2vw;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.testimonials-marquee {
+    display: flex;
+    white-space: nowrap;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.testimonials-track {
+    display: flex;
+    gap: 30px;
+    padding: 1rem 0 2rem;
+    flex-shrink: 0;
+    min-width: 100%;
+    align-items: stretch;
+    padding-right: 30px;
+}
+
+.testimonial-card {
+    min-width: 320px;
+    max-width: 400px;
+    background: #111;
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    white-space: normal;
+}
+
+.theme-light .testimonial-card {
+    background: #f5f5f5;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.quote-icon {
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--accent);
+    font-family: serif;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    opacity: 0.8;
+}
+
+.testimonial-author h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.testimonial-author span {
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Clients Marquee */
+.clients-section {
+    padding: 6vw 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.clients-marquee {
+    display: flex;
+    white-space: nowrap;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.clients-track {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    min-width: 100%;
+    justify-content: space-around;
+    gap: 4rem;
+    padding-right: 4rem;
+    /* Match gap for seamless loop */
+}
+
+.client-logo {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    cursor: default;
+    user-select: none;
+}
+
+.theme-light .client-logo {
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.15);
+}
+
+.client-logo:hover {
+    color: var(--text-primary);
+    -webkit-text-stroke: 1.5px var(--text-primary);
+    transform: scale(1.05);
 }
 
 /* Contact */
